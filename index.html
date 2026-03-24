@@ -1,4 +1,38 @@
-<body bgcolor="#000000"></body>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>HSV Rainbow Background</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            /* Убираем переходы CSS, чтобы JS управлял плавностью напрямую */
+            transition: none; 
+        }
+    </style>
+</head>
+<body>
+
 <script>
-  document.body.style.backgroundColor = "#FF00FF";
+    let hue = 0;
+    const speed = 0.5; // Скорость смены цвета (градусы за кадр)
+
+    function animate() {
+        // Увеличиваем тон и сбрасываем на 0 при достижении 360
+        hue = (hue + speed) % 360;
+
+        // Используем HSL: (Тон, Насыщенность, Яркость)
+        // 100% насыщенности и 50% яркости дают чистый яркий цвет
+        document.body.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
+
+        // Запрашиваем следующий кадр анимации
+        requestAnimationFrame(animate);
+    }
+
+    // Запускаем цикл
+    animate();
 </script>
+
+</body>
+</html>
